@@ -1,0 +1,113 @@
+﻿<Window x:Class="OsVersionDetect.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:OsVersionDetect"
+        x:Name="WindowRoot"
+        Title="OS Version Detect"
+        FontFamily="Segoe UI"
+        Height="200" Width="400" SizeToContent="Height" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <local:VersionToStringConverter x:Key="VersionToStringConverterKey"/>
+    </Window.Resources>
+
+    <Grid Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            HorizontalAlignment="Left" VerticalAlignment="Center"
+            Margin="4"
+            Text="GetVersionEx"/>
+        <TextBox
+            Grid.Column="1" Grid.Row="0"
+            Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+            Margin="4"
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            IsReadOnly="True"
+            Text="{Binding OsVersionByGetVersionEx, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}}"/>
+
+        <TextBlock
+            Grid.Column="0" Grid.Row="1"
+            HorizontalAlignment="Left" VerticalAlignment="Center"
+            Margin="4"
+            Text="RtlGetVersion"/>
+        <TextBox
+            Grid.Column="1" Grid.Row="1"
+            Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+            Margin="4"
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            IsReadOnly="True"
+            Text="{Binding OsVersionByRtlGetVersion, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}}"/>
+
+        <TextBlock
+            Grid.Column="0" Grid.Row="2"
+            HorizontalAlignment="Left" VerticalAlignment="Center"
+            Margin="4"
+            Text="NetWkstaGetInfo"/>
+        <TextBox
+            Grid.Column="1" Grid.Row="2"
+            Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+            Margin="4"
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            IsReadOnly="True"
+            Text="{Binding OsVersionByNetWkstaGetInfo, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}}"/>
+
+        <TextBlock
+            Grid.Column="0" Grid.Row="3"
+            HorizontalAlignment="Left" VerticalAlignment="Center"
+            Margin="4"
+            Text="WMI"/>
+        <TextBox
+            Grid.Column="1" Grid.Row="3"
+            Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+            Margin="4"
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            IsReadOnly="True"
+            Text="{Binding OsVersionByWmi, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}}"/>
+
+        <TextBlock
+            Grid.Column="0" Grid.Row="4"
+            HorizontalAlignment="Left" VerticalAlignment="Center"
+            Margin="4"
+            Text="VerifyVersionInfo"/>
+        <StackPanel
+            Grid.Column="1" Grid.Row="4"
+            HorizontalAlignment="Left"
+            Orientation="Horizontal">
+            <TextBlock
+                VerticalAlignment="Center"
+                Margin="4"
+                Text="equal to or higher than"/>
+            <ComboBox
+                Width="35" VerticalAlignment="Center"
+                Margin="4"
+                ItemsSource="{Binding Numbers, ElementName=WindowRoot}"
+                SelectedItem="{Binding MajorVersion, ElementName=WindowRoot}"/>
+            <TextBlock
+                VerticalAlignment="Center"
+                Margin="0"
+                Text="."/>
+            <ComboBox
+                Width="35" VerticalAlignment="Center"
+                Margin="4"
+                ItemsSource="{Binding Numbers, ElementName=WindowRoot}"
+                SelectedItem="{Binding MinorVersion, ElementName=WindowRoot}"/>
+            <TextBox
+                Width="50" Height="23" VerticalAlignment="Center"
+                Margin="4"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                IsReadOnly="True"
+                Text="{Binding IsOsEqualOrNewer, ElementName=WindowRoot}"/>
+        </StackPanel>
+    </Grid>
+</Window>
