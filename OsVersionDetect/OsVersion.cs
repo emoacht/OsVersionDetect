@@ -36,7 +36,7 @@ namespace OsVersionDetect
 			public byte wReserved;
 		}
 
-		[DllImport("Netapi32.dll", SetLastError = true)]
+		[DllImport("netapi32.dll", SetLastError = true)]
 		private static extern int NetWkstaGetInfo(
 			string servername,
 			int level,
