@@ -129,11 +129,11 @@ namespace OsVersionDetect
 			return null;
 		}
 
-		public static bool? IsOsEqualOrNewerByVerifyVersionInfo(int versionMajor, int versionMinor)
+		public static bool? IsOsEqualOrNewerByVerifyVersionInfo(int major, int minor)
 		{
 			var info = new OSVERSIONINFOEX();
-			info.dwMajorVersion = (uint)versionMajor;
-			info.dwMinorVersion = (uint)versionMinor;
+			info.dwMajorVersion = (uint)major;
+			info.dwMinorVersion = (uint)minor;
 			info.dwOSVersionInfoSize = (uint)Marshal.SizeOf(info);
 
 			ulong cm = 0;
