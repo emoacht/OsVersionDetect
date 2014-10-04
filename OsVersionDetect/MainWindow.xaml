@@ -87,9 +87,9 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Margin="4"
-                Text="equal to or higher than"/>
+                Text="equal to or newer than"/>
             <ComboBox
-                Width="35" VerticalAlignment="Center"
+                Width="36" VerticalAlignment="Center"
                 Margin="4"
                 ItemsSource="{Binding Numbers, ElementName=WindowRoot}"
                 SelectedItem="{Binding MajorVersion, ElementName=WindowRoot}"/>
@@ -98,7 +98,7 @@
                 Margin="0"
                 Text="."/>
             <ComboBox
-                Width="35" VerticalAlignment="Center"
+                Width="36" VerticalAlignment="Center"
                 Margin="4"
                 ItemsSource="{Binding Numbers, ElementName=WindowRoot}"
                 SelectedItem="{Binding MinorVersion, ElementName=WindowRoot}"/>
