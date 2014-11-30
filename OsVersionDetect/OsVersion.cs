@@ -36,11 +36,15 @@ namespace OsVersionDetect
 			public byte wReserved;
 		}
 
-		[DllImport("netapi32.dll", SetLastError = true)]
+		[DllImport("netapi32.dll")]
 		private static extern int NetWkstaGetInfo(
 			string servername,
 			int level,
 			out IntPtr bufptr);
+
+		[DllImport("netapi32.dll")]
+		private static extern int NetApiBufferFree(
+			IntPtr Buffer);
 
 		[StructLayout(LayoutKind.Sequential)]
 		private struct WKSTA_INFO_100
@@ -99,16 +103,24 @@ namespace OsVersionDetect
 
 		public static Version GetOsVersionByNetWkstaGetInfo()
 		{
-			IntPtr buff;
+			IntPtr buff = IntPtr.Zero;
 
-			var result = NetWkstaGetInfo(null, 100, out buff);
-
-			if (result == 0) // NERR_Success
+			try
 			{
-				var info = (WKSTA_INFO_100)Marshal.PtrToStructure(buff, typeof(WKSTA_INFO_100));
+				var result = NetWkstaGetInfo(null, 100, out buff);
 
-				if (info.platform_id == 500) // PLATFORM_ID_NT
-					return new Version((int)info.ver_major, (int)info.ver_minor);
+				if (result == 0) // NERR_Success
+				{
+					var info = (WKSTA_INFO_100)Marshal.PtrToStructure(buff, typeof(WKSTA_INFO_100));
+
+					if (info.platform_id == 500) // PLATFORM_ID_NT
+						return new Version((int)info.ver_major, (int)info.ver_minor);
+				}
+			}
+			finally
+			{
+				if (buff != IntPtr.Zero)
+					NetApiBufferFree(buff);
 			}
 
 			return null;
