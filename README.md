@@ -11,6 +11,6 @@ Sample methods to detect Windows OS versions
 
 In C# with Visual Studio Professional 2013
 
-##Other
+##License
 
- - License: MIT License
+ - MIT License
