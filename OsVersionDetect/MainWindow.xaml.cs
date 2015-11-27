@@ -24,8 +24,12 @@ namespace OsVersionDetect
 			OsVersionByNetWkstaGetInfo = OsVersion.GetOsVersionByNetWkstaGetInfo();
 			OsVersionByWmi = OsVersion.GetOsVersionByWmi();
 			CheckOsEqualOrNewer();
-		}
 
+			OsVersionByCurrentVersion = OsVersionAnother.CurrentVersion;
+			OsBuildNumberByCurrentBuild = OsVersionAnother.CurrentBuild;
+			OsBuildLab = OsVersionAnother.BuildLab;
+			OsReleaseId = OsVersionAnother.ReleaseId;
+		}
 
 		#region GetVersionEx
 
@@ -36,13 +40,12 @@ namespace OsVersionDetect
 		}
 		public static readonly DependencyProperty OsVersionByGetVersionExProperty =
 			DependencyProperty.Register(
-				"OsVersionByGetVersionEx",
+				nameof(OsVersionByGetVersionEx),
 				typeof(Version),
 				typeof(MainWindow),
-				new FrameworkPropertyMetadata(null));
+				new PropertyMetadata(null));
 
 		#endregion
-
 
 		#region RtlGetVersion
 
@@ -53,13 +56,12 @@ namespace OsVersionDetect
 		}
 		public static readonly DependencyProperty OsVersionByRtlGetVersionProperty =
 			DependencyProperty.Register(
-				"OsVersionByRtlGetVersion",
+				nameof(OsVersionByRtlGetVersion),
 				typeof(Version),
 				typeof(MainWindow),
-				new FrameworkPropertyMetadata(null));
+				new PropertyMetadata(null));
 
 		#endregion
-
 
 		#region NetWkstaGetInfo
 
@@ -70,13 +72,12 @@ namespace OsVersionDetect
 		}
 		public static readonly DependencyProperty OsVersionByNetWkstaGetInfoProperty =
 			DependencyProperty.Register(
-				"OsVersionByNetWkstaGetInfo",
+				nameof(OsVersionByNetWkstaGetInfo),
 				typeof(Version),
 				typeof(MainWindow),
-				new FrameworkPropertyMetadata(null));
+				new PropertyMetadata(null));
 
 		#endregion
-
 
 		#region WMI
 
@@ -87,21 +88,16 @@ namespace OsVersionDetect
 		}
 		public static readonly DependencyProperty OsVersionByWmiProperty =
 			DependencyProperty.Register(
-				"OsVersionByWmi",
+				nameof(OsVersionByWmi),
 				typeof(Version),
 				typeof(MainWindow),
-				new FrameworkPropertyMetadata(null));
+				new PropertyMetadata(null));
 
 		#endregion
 
-
 		#region VerifyVersionInfo
 
-		public int[] Numbers
-		{
-			get { return _numbers; }
-		}
-		private readonly int[] _numbers = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		public int[] Numbers { get; } = Enumerable.Range(0, 11).ToArray();
 
 		public int MajorVersion
 		{
@@ -110,10 +106,10 @@ namespace OsVersionDetect
 		}
 		public static readonly DependencyProperty MajorVersionProperty =
 			DependencyProperty.Register(
-				"MajorVersion",
+				nameof(MajorVersion),
 				typeof(int),
 				typeof(MainWindow),
-				new FrameworkPropertyMetadata(
+				new PropertyMetadata(
 					6,
 					(d, e) => ((MainWindow)d).CheckOsEqualOrNewer()));
 
@@ -124,10 +120,10 @@ namespace OsVersionDetect
 		}
 		public static readonly DependencyProperty MinorVersionProperty =
 			DependencyProperty.Register(
-				"MinorVersion",
+				nameof(MinorVersion),
 				typeof(int),
 				typeof(MainWindow),
-				new FrameworkPropertyMetadata(
+				new PropertyMetadata(
 					3,
 					(d, e) => ((MainWindow)d).CheckOsEqualOrNewer()));
 
@@ -138,15 +134,79 @@ namespace OsVersionDetect
 		}
 		public static readonly DependencyProperty IsOsEqualOrNewerProperty =
 			DependencyProperty.Register(
-				"IsOsEqualOrNewer",
+				nameof(IsOsEqualOrNewer),
 				typeof(bool?),
 				typeof(MainWindow),
-				new FrameworkPropertyMetadata(false));
+				new PropertyMetadata(false));
 
 		private void CheckOsEqualOrNewer()
 		{
 			IsOsEqualOrNewer = OsVersion.IsOsEqualOrNewerByVerifyVersionInfo(MajorVersion, MinorVersion);
 		}
+
+		#endregion
+
+		#region CurrentVersion
+
+		public string OsVersionByCurrentVersion
+		{
+			get { return (string)GetValue(OsVersionByCurrentVersionProperty); }
+			set { SetValue(OsVersionByCurrentVersionProperty, value); }
+		}
+		public static readonly DependencyProperty OsVersionByCurrentVersionProperty =
+			DependencyProperty.Register(
+				nameof(OsVersionByCurrentVersion),
+				typeof(string),
+				typeof(MainWindow),
+				new PropertyMetadata(null));
+
+		#endregion
+
+		#region CurrentBuild
+
+		public string OsBuildNumberByCurrentBuild
+		{
+			get { return (string)GetValue(OsBuildNumberByCurrentBuildProperty); }
+			set { SetValue(OsBuildNumberByCurrentBuildProperty, value); }
+		}
+		public static readonly DependencyProperty OsBuildNumberByCurrentBuildProperty =
+			DependencyProperty.Register(
+				nameof(OsBuildNumberByCurrentBuild),
+				typeof(string),
+				typeof(MainWindow),
+				new PropertyMetadata(null));
+
+		#endregion
+
+		#region BuildLab
+
+		public string OsBuildLab
+		{
+			get { return (string)GetValue(OsBuildLabProperty); }
+			set { SetValue(OsBuildLabProperty, value); }
+		}
+		public static readonly DependencyProperty OsBuildLabProperty =
+			DependencyProperty.Register(
+				nameof(OsBuildLab),
+				typeof(string),
+				typeof(MainWindow),
+				new PropertyMetadata(null));
+
+		#endregion
+
+		#region ReleaseId
+
+		public string OsReleaseId
+		{
+			get { return (string)GetValue(OsReleaseIdProperty); }
+			set { SetValue(OsReleaseIdProperty, value); }
+		}
+		public static readonly DependencyProperty OsReleaseIdProperty =
+			DependencyProperty.Register(
+				nameof(OsReleaseId),
+				typeof(string),
+				typeof(MainWindow),
+				new PropertyMetadata(null));
 
 		#endregion
 	}

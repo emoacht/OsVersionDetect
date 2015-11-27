@@ -5,7 +5,8 @@
 		x:Name="WindowRoot"
 		Title="OS Version Detect"
 		FontFamily="Segoe UI"
-		Height="200" Width="400" SizeToContent="Height" ResizeMode="CanMinimize">
+		Height="320" Width="410" SizeToContent="Height"
+		ResizeMode="CanMinimize">
 	<Window.Resources>
 		<local:VersionToStringConverter x:Key="VersionToStringConverterKey"/>
 	</Window.Resources>
@@ -16,6 +17,10 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
@@ -89,7 +94,7 @@
 				Margin="4"
 				Text="equal to or newer than"/>
 			<ComboBox
-				Width="36" VerticalAlignment="Center"
+				Width="42" VerticalAlignment="Center"
 				Margin="4"
 				ItemsSource="{Binding Numbers, ElementName=WindowRoot}"
 				SelectedItem="{Binding MajorVersion, ElementName=WindowRoot}"/>
@@ -98,16 +103,68 @@
 				Margin="0"
 				Text="."/>
 			<ComboBox
-				Width="36" VerticalAlignment="Center"
+				Width="42" VerticalAlignment="Center"
 				Margin="4"
 				ItemsSource="{Binding Numbers, ElementName=WindowRoot}"
 				SelectedItem="{Binding MinorVersion, ElementName=WindowRoot}"/>
 			<TextBox
-				Width="50" Height="23" VerticalAlignment="Center"
+				Width="48" Height="23" VerticalAlignment="Center"
 				Margin="4"
 				HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
 				IsReadOnly="True"
 				Text="{Binding IsOsEqualOrNewer, ElementName=WindowRoot}"/>
 		</StackPanel>
+
+		<TextBlock
+			Grid.Column="0" Grid.Row="5"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			Margin="4"
+			Text="CurrentVersion"/>
+		<TextBox
+			Grid.Column="1" Grid.Row="5"
+			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Margin="4"
+			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			IsReadOnly="True"
+			Text="{Binding OsVersionByCurrentVersion, ElementName=WindowRoot}"/>
+
+		<TextBlock
+			Grid.Column="0" Grid.Row="6"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			Margin="4"
+			Text="CurrentBuild"/>
+		<TextBox
+			Grid.Column="1" Grid.Row="6"
+			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Margin="4"
+			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			IsReadOnly="True"
+			Text="{Binding OsBuildNumberByCurrentBuild, ElementName=WindowRoot}"/>
+
+		<TextBlock
+			Grid.Column="0" Grid.Row="7"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			Margin="4"
+			Text="BuildLab"/>
+		<TextBox
+			Grid.Column="1" Grid.Row="7"
+			Height="23" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+			Margin="4"
+			Padding="4,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+			IsReadOnly="True"
+			Text="{Binding OsBuildLab, ElementName=WindowRoot}"/>
+		
+		<TextBlock
+			Grid.Column="0" Grid.Row="8"
+			HorizontalAlignment="Left" VerticalAlignment="Center"
+			Margin="4"
+			Text="ReleaseId"/>
+		<TextBox
+			Grid.Column="1" Grid.Row="8"
+			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Margin="4"
+			Padding="8,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+			IsReadOnly="True"
+			Text="{Binding OsReleaseId, ElementName=WindowRoot}"/>
 	</Grid>
 </Window>
