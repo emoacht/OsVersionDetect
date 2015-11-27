@@ -76,7 +76,6 @@ namespace OsVersionDetect
 
 		#endregion
 
-
 		public static Version GetOsVersionByGetVersionEx()
 		{
 			var info = new OSVERSIONINFOEX();
@@ -85,7 +84,7 @@ namespace OsVersionDetect
 			var result = GetVersionEx(ref info);
 
 			return result
-				? new Version((int)info.dwMajorVersion, (int)info.dwMinorVersion)
+				? new Version((int)info.dwMajorVersion, (int)info.dwMinorVersion, (int)info.dwBuildNumber)
 				: null;
 		}
 
@@ -97,7 +96,7 @@ namespace OsVersionDetect
 			var result = RtlGetVersion(ref info);
 
 			return (result == 0) // STATUS_SUCCESS
-				? new Version((int)info.dwMajorVersion, (int)info.dwMinorVersion)
+				? new Version((int)info.dwMajorVersion, (int)info.dwMinorVersion, (int)info.dwBuildNumber)
 				: null;
 		}
 
@@ -116,29 +115,32 @@ namespace OsVersionDetect
 					if (info.platform_id == 500) // PLATFORM_ID_NT
 						return new Version((int)info.ver_major, (int)info.ver_minor);
 				}
+
+				return null;
 			}
 			finally
 			{
 				if (buff != IntPtr.Zero)
 					NetApiBufferFree(buff);
 			}
-
-			return null;
 		}
 
 		public static Version GetOsVersionByWmi()
 		{
-			var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
-
-			var os = searcher.Get().Cast<ManagementObject>().FirstOrDefault();
-
-			if ((os != null) && (os["OsType"] != null) && (os["Version"] != null))
+			using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem"))
 			{
-				if (os["OsType"].ToString() == "18") // WINNT
-					return new Version(os["Version"].ToString());
-			}
+				var os = searcher.Get().Cast<ManagementObject>().FirstOrDefault();
 
-			return null;
+				var osTypeValue = (ushort)(os?["OSType"] ?? 0);
+				if (osTypeValue == 18) // WINNT
+				{
+					var versionValue = os?["Version"] as string;
+					if (versionValue != null)
+						return new Version(versionValue);
+				}
+
+				return null;
+			}
 		}
 
 		public static bool? IsOsEqualOrNewerByVerifyVersionInfo(int major, int minor)

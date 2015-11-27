@@ -18,7 +18,9 @@ namespace OsVersionDetect
 			if (version == null)
 				return DependencyProperty.UnsetValue;
 
-			return version.ToString(2); // major, minor
+			var fieldCount = (parameter is int) ? (int)parameter : 2; // major.minor
+
+			return version.ToString(fieldCount);
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
