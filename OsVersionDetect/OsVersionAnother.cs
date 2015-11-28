@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
@@ -13,15 +14,15 @@ namespace OsVersionDetect
 	{
 		#region Registry
 
-		public static string CurrentVersion => GetRegistryValue(nameof(CurrentVersion));
-		public static string CurrentBuild => GetRegistryValue(nameof(CurrentBuild));
-		public static string BuildLab => GetRegistryValue(nameof(BuildLab));
-		public static string ReleaseId => GetRegistryValue(nameof(ReleaseId));
-
-		private static string GetRegistryValue(string name)
+		public static string CurrentVersion => GetRegistryValue();
+		public static string CurrentBuild => GetRegistryValue();
+		public static string BuildLab => GetRegistryValue();
+		public static string ReleaseId => GetRegistryValue();
+		
+		private static string GetRegistryValue([CallerMemberName] string keyName = null)
 		{
-			return _currentVersionRegistryValues.Value.ContainsKey(name)
-				? _currentVersionRegistryValues.Value[name]
+			return _currentVersionRegistryValues.Value.ContainsKey(keyName)
+				? _currentVersionRegistryValues.Value[keyName]
 				: null;
 		}
 
