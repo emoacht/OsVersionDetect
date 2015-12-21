@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsVersionDetect", "OsVersionDetect\OsVersionDetect.csproj", "{1EA6BC1E-68C9-426E-805D-A12BC5A92F60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OsVersionDetect.Test", "OsVersionDetect.Test\OsVersionDetect.Test.csproj", "{3078B238-A8C5-4A5C-9C1A-3C1561E0F2E6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1EA6BC1E-68C9-426E-805D-A12BC5A92F60} = {1EA6BC1E-68C9-426E-805D-A12BC5A92F60}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{1EA6BC1E-68C9-426E-805D-A12BC5A92F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EA6BC1E-68C9-426E-805D-A12BC5A92F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EA6BC1E-68C9-426E-805D-A12BC5A92F60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3078B238-A8C5-4A5C-9C1A-3C1561E0F2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3078B238-A8C5-4A5C-9C1A-3C1561E0F2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3078B238-A8C5-4A5C-9C1A-3C1561E0F2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3078B238-A8C5-4A5C-9C1A-3C1561E0F2E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
