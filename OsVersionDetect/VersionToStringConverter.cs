@@ -18,9 +18,48 @@ namespace OsVersionDetect
 			if (version == null)
 				return DependencyProperty.UnsetValue;
 
-			var fieldCount = (parameter is int) ? (int)parameter : 2; // major.minor
+			int fieldCount;
+			if (!int.TryParse(parameter as string, out fieldCount))
+				fieldCount = 2; // major.minor
+
+			fieldCount = CoerceFieldCount(version, fieldCount);
 
 			return version.ToString(fieldCount);
+		}
+
+		private static int CoerceFieldCount(Version version, int fieldCount)
+		{
+			if (fieldCount <= 0)
+				return 0;
+
+			for (int i = 1; i <= fieldCount; i++)
+			{
+				switch (i)
+				{
+					case 1:
+						if (version.Major < 0)
+							return 0;
+
+						break;
+					case 2:
+						if (version.Minor < 0)
+							return 1;
+
+						break;
+					case 3:
+						if (version.Build < 0)
+							return 2;
+
+						break;
+					default:
+						if (version.Revision < 0)
+							return 3;
+
+						return 4;
+				}
+			}
+
+			return fieldCount;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

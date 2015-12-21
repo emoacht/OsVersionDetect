@@ -27,8 +27,10 @@ namespace OsVersionDetect
 			public uint dwMinorVersion;
 			public uint dwBuildNumber;
 			public uint dwPlatformId;
+
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
 			public string szCSDVersion;
+
 			public ushort wServicePackMajor;
 			public ushort wServicePackMinor;
 			public ushort wSuiteMask;
@@ -127,14 +129,15 @@ namespace OsVersionDetect
 
 		public static Version GetOsVersionByWmi()
 		{
-			using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem"))
+			using (var searcher = new ManagementObjectSearcher(new SelectQuery("Win32_OperatingSystem")))
 			{
 				var os = searcher.Get().Cast<ManagementObject>().FirstOrDefault();
+				var properties = os?.Properties.Cast<PropertyData>().ToArray();
 
-				var osTypeValue = (ushort)(os?["OSType"] ?? 0);
+				var osTypeValue = (ushort)(properties?.SingleOrDefault(x => (x.Name == "OSType") && (x.Type == CimType.UInt16))?.Value ?? 0);
 				if (osTypeValue == 18) // WINNT
 				{
-					var versionValue = os?["Version"] as string;
+					var versionValue = properties?.SingleOrDefault(x => x.Name == "Version")?.Value as string;
 					if (versionValue != null)
 						return new Version(versionValue);
 				}

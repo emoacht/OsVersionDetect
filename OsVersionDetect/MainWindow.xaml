@@ -35,11 +35,11 @@
 			Text="GetVersionEx"/>
 		<TextBox
 			Grid.Column="1" Grid.Row="0"
-			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Width="100" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
 			Margin="4"
-			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Padding="4,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
 			IsReadOnly="True"
-			Text="{Binding OsVersionByGetVersionEx, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}}"/>
+			Text="{Binding OsVersionByGetVersionEx, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}, ConverterParameter=3}"/>
 
 		<TextBlock
 			Grid.Column="0" Grid.Row="1"
@@ -48,11 +48,11 @@
 			Text="RtlGetVersion"/>
 		<TextBox
 			Grid.Column="1" Grid.Row="1"
-			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Width="100" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
 			Margin="4"
-			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Padding="4,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
 			IsReadOnly="True"
-			Text="{Binding OsVersionByRtlGetVersion, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}}"/>
+			Text="{Binding OsVersionByRtlGetVersion, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}, ConverterParameter=3}"/>
 
 		<TextBlock
 			Grid.Column="0" Grid.Row="2"
@@ -61,11 +61,11 @@
 			Text="NetWkstaGetInfo"/>
 		<TextBox
 			Grid.Column="1" Grid.Row="2"
-			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Width="100" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
 			Margin="4"
-			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Padding="4,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
 			IsReadOnly="True"
-			Text="{Binding OsVersionByNetWkstaGetInfo, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}}"/>
+			Text="{Binding OsVersionByNetWkstaGetInfo, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}, ConverterParameter=3}"/>
 
 		<TextBlock
 			Grid.Column="0" Grid.Row="3"
@@ -74,11 +74,11 @@
 			Text="WMI"/>
 		<TextBox
 			Grid.Column="1" Grid.Row="3"
-			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Width="100" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
 			Margin="4"
-			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Padding="4,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
 			IsReadOnly="True"
-			Text="{Binding OsVersionByWmi, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}}"/>
+			Text="{Binding OsVersionByWmi, ElementName=WindowRoot, Converter={StaticResource VersionToStringConverterKey}, ConverterParameter=3}"/>
 
 		<TextBlock
 			Grid.Column="0" Grid.Row="4"
@@ -122,9 +122,9 @@
 			Text="CurrentVersion"/>
 		<TextBox
 			Grid.Column="1" Grid.Row="5"
-			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Width="60" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
 			Margin="4"
-			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Padding="4,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
 			IsReadOnly="True"
 			Text="{Binding OsVersionByCurrentVersion, ElementName=WindowRoot}"/>
 
@@ -135,9 +135,9 @@
 			Text="CurrentBuild"/>
 		<TextBox
 			Grid.Column="1" Grid.Row="6"
-			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Width="60" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
 			Margin="4"
-			HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+			Padding="4,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
 			IsReadOnly="True"
 			Text="{Binding OsBuildNumberByCurrentBuild, ElementName=WindowRoot}"/>
 
@@ -153,7 +153,7 @@
 			Padding="4,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
 			IsReadOnly="True"
 			Text="{Binding OsBuildLab, ElementName=WindowRoot}"/>
-		
+
 		<TextBlock
 			Grid.Column="0" Grid.Row="8"
 			HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -161,9 +161,9 @@
 			Text="ReleaseId"/>
 		<TextBox
 			Grid.Column="1" Grid.Row="8"
-			Width="50" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
+			Width="60" Height="23" HorizontalAlignment="Left" VerticalAlignment="Center"
 			Margin="4"
-			Padding="8,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+			Padding="4,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
 			IsReadOnly="True"
 			Text="{Binding OsReleaseId, ElementName=WindowRoot}"/>
 	</Grid>
