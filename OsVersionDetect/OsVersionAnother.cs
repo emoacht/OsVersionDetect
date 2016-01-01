@@ -18,7 +18,7 @@ namespace OsVersionDetect
 		public static string CurrentBuild => GetRegistryValue();
 		public static string BuildLab => GetRegistryValue();
 		public static string ReleaseId => GetRegistryValue();
-		
+
 		private static string GetRegistryValue([CallerMemberName] string keyName = null)
 		{
 			return _currentVersionRegistryValues.Value.ContainsKey(keyName)
