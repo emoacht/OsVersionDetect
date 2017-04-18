@@ -1,16 +1,15 @@
-﻿OS Version Detect
-=====
+﻿# OS Version Detect
 
 Sample methods to detect Windows OS versions
 
-##Requirements
+## Requirements
 
 .NET Framework 4.6 (it will work on 4.0 as well)
 
-##Development
+## Development
 
 In C# with Visual Studio Community 2015
 
-##License
+## License
 
  - MIT License
